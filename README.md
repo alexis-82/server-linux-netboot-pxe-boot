@@ -76,6 +76,9 @@ https://launchpad.net/ubuntu/+cdmirrors
 #### Step 5: Configure PXE Menu
 Create a PXE menu  
 ```
+sudo mkdir /var/lib/tftpboot/pxelinux.cfg/
+```
+```
 sudo vim /var/lib/tftpboot/pxelinux.cfg/default
 ```
 Add the following menu structure:  
@@ -101,3 +104,13 @@ APPEND root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://releases.ubuntu.co
 #### Step 6: Test PXE Boot  
 It's time to test the PXE boot process.  
 Access the bios and set the first boot to network to bring up the menu for installing the operating system.
+
+#### NOTE
+Setting firewall of the system:  
+```
+sudo ufw allow 69/udp
+sudo ufw allow 2049/tcp
+sudo ufw allow 111/tcp
+sudo ufw allow 111/udp
+sudo ufw allow 4011/udp
+```

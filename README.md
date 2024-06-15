@@ -10,7 +10,9 @@
 ```sudo apt install tftpd-hpa apache2 syslinux isc-dhcp-server```
 
 #### Step 2: Configure TFTP Server  
-```sudo vim /etc/default/tftpd-hpa```
+```
+sudo vim /etc/default/tftpd-hpa
+```
 
 Edit the file:  
 ```

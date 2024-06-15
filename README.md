@@ -21,7 +21,7 @@ Edit the file:
 TFTP_USERNAME="tftp"
 TFTP_DIRECTORY="/var/lib/tftpboot"
 TFTP_ADDRESS=":69"
-TFTP_OPTIONS="--secure"
+TFTP_OPTIONS="--secure --create --listen"
 ```
 :warning: Be aware that in the latest versions, the directory could be /var/lib/tftpboot/amd64 e.g. Ubuntu24
 

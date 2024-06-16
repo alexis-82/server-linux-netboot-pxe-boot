@@ -1,6 +1,6 @@
 #### Step 1: Install Required Packages  
 ```
-sudo apt install tftpd-hpa apache2 syslinux isc-dhcp-server
+sudo apt install tftpd-hpa syslinux isc-dhcp-server
 ```
 
 #### Step 2: Configure TFTP Server  

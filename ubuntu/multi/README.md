@@ -105,12 +105,17 @@ kernel ubuntu-server/casper/vmlinuz
 append boot=casper initrd=ubuntu-server/casper/initrd ip=dhcp url=http://192.168.1.150/ubuntu-server/ubuntu.iso live-media=/casper/ ignore_uuid ---
 
 label 2
-menu label ^2) Install Debian
+menu label ^2) Install Debian Netboot
 kernel debian/debian-installer/amd64/linux
 append initrd=debian/debian-installer/amd64/initrd.gz
 
 label 3
-menu label ^3) Boot from local drive
+menu label ^3) Install Debian Live
+kernel debian/live/vmlinuz-6.1.0-18-amd64
+append initrd=debian/live/initrd.img-6.1.0-18-amd64 boot=live ip=dhcp fetch=http://192.168.1.150/debian/live/filesystem.squashfs
+
+label 5
+menu label ^5) Boot from local drive
 localboot 0
 ```
 

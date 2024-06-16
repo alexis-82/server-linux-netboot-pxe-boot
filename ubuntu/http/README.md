@@ -1,9 +1,11 @@
-#### Step 1: Install Required Packages  
+# Steps to Configure PXE Boot with APACHE
+
+## Step 1: Install Required Packages  
 ```
 sudo apt install tftpd-hpa apache2 syslinux pxelinux isc-dhcp-server
 ```
 
-#### Step 2: Configure TFTP Server  
+## Step 2: Configure TFTP Server  
 ```
 sudo vim /etc/default/tftpd-hpa
 ```
@@ -21,7 +23,7 @@ sudo mkdir /var/lib/tftpboot
 ```
 
 
-#### Step 3: Configure DHCP Server  
+## Step 3: Configure DHCP Server  
 ```
 sudo vim /etc/dhcp/dhcpd.conf
 ``` 
@@ -45,7 +47,7 @@ subnet <network-address> netmask <subnet-mask> {
   max-lease-time 7200;
 }
 ```
-#### Step 4: Mount ISO  
+## Step 4: Mount ISO  
 ```
 mount -o loop /home/$USER/ubuntu-24.04-live-server-amd64.iso /mnt/
 ```
@@ -59,7 +61,7 @@ cp -rf /mnt/. /var/lib/tftpboot/ubuntu-server/
 chmod -R 755 /var/lib/tftpboot/ubuntu-server/
 ```
 
-#### Step 5: Set Up Apache  
+## Step 5: Set Up Apache  
 
 ```
 cd /var/www/html/
@@ -80,7 +82,7 @@ cd /var
 chown -R www-data:www-data www/
 ```
 
-#### Step 6: Files boot  
+## Step 6: Files boot  
 ```
 cp /usr/lib/syslinux/memdisk /var/lib/tftpboot
 ```
@@ -95,7 +97,7 @@ EFI64
 cp /usr/lib/syslinux/modules/efi64/{ldlinux.e64,chain.c32,libcom32.c32,libutil.c32,mboot.c32,menu.c32,vesamenu.c32} /var/lib/tftpboot
 ```
 
-#### Step 7: Configure PXE Menu
+## Step 7: Configure PXE Menu
 Create a PXE menu  
 ```
 sudo mkdir /var/lib/tftpboot/pxelinux.cfg/
@@ -121,18 +123,18 @@ menu label ^2) Boot from local drive
 localboot 0
 ```
 
-#### Step 8: Restart all services
+## Step 8: Restart all services
 ```
 sudo systemctl restart isc-dhcp-server
 sudo systemctl restart tftpd-hpa
 sudo systemctl restart apache2
 ```
 
-#### Step 9: Test PXE Boot  
+## Step 9: Test PXE Boot  
 It's time to test the PXE boot process.  
 Access the bios and set the first boot to network to bring up the menu for installing the operating system.
 
-#### NOTE
+## NOTE
 Setting firewall of the system:  
 ```
 sudo ufw allow 69/udp

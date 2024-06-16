@@ -1,9 +1,11 @@
-#### Step 1: Install Required Packages  
+# Steps to Configure PXE Boot with Multi OS
+
+## Step 1: Install Required Packages  
 ```
 sudo apt install tftpd-hpa syslinux pxelinux isc-dhcp-server
 ```
 
-#### Step 2: Configure TFTP Server  
+## Step 2: Configure TFTP Server  
 ```
 sudo vim /etc/default/tftpd-hpa
 ```
@@ -21,7 +23,7 @@ sudo mkdir /var/lib/tftpboot
 ```
 
 
-#### Step 3: Configure DHCP Server  
+## Step 3: Configure DHCP Server  
 ```
 sudo vim /etc/dhcp/dhcpd.conf
 ``` 
@@ -45,7 +47,7 @@ subnet <network-address> netmask <subnet-mask> {
   max-lease-time 7200;
 }
 ```
-#### Step 4: Set Up Netboot Files  
+## Step 4: Set Up Netboot Files  
 ```
 sudo cp /usr/lib/syslinux/modules/bios/* /var/lib/tftpboot/
 ```
@@ -68,7 +70,7 @@ Debian:
 https://ftp.debian.org/debian/dists/
 ```
 
-#### Step 5: Files boot  
+## Step 5: Files boot  
 ```
 cp /usr/lib/syslinux/memdisk /var/lib/tftpboot
 ```
@@ -83,7 +85,7 @@ EFI64
 cp /usr/lib/syslinux/modules/efi64/{ldlinux.e64,chain.c32,libcom32.c32,libutil.c32,mboot.c32,menu.c32,vesamenu.c32} /var/lib/tftpboot
 ```
 
-#### Step 6: Configure PXE Menu
+## Step 6: Configure PXE Menu
 Create a PXE menu  
 ```
 sudo mkdir /var/lib/tftpboot/pxelinux.cfg/
@@ -119,17 +121,17 @@ menu label ^4) Boot from local drive
 localboot 0
 ```
 
-#### Step 7: Restart all services
+## Step 7: Restart all services
 ```
 sudo systemctl restart isc-dhcp-server
 sudo systemctl restart tftpd-hpa
 ```
 
-#### Step 8: Test PXE Boot  
+## Step 8: Test PXE Boot  
 It's time to test the PXE boot process.  
 Access the bios and set the first boot to network to bring up the menu for installing the operating system.
 
-#### NOTE
+## NOTE
 Setting firewall of the system:  
 ```
 sudo ufw allow 69/udp

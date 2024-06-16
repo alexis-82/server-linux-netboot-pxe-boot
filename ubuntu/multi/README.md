@@ -114,8 +114,8 @@ menu label ^3) Install Debian Live
 kernel debian/live/vmlinuz-6.1.0-18-amd64
 append initrd=debian/live/initrd.img-6.1.0-18-amd64 boot=live ip=dhcp fetch=http://192.168.1.150/debian/live/filesystem.squashfs
 
-label 5
-menu label ^5) Boot from local drive
+label 4
+menu label ^4) Boot from local drive
 localboot 0
 ```
 

@@ -15,15 +15,28 @@ The `preseed.cfg` file allows you to automate the Ubuntu installation process, r
 ## Using the preseed.cfg file during installation
 1. Copy the `preseed.cfg` file to the TFTP export directory on the server.
 2. Modify the PXE Linux configuration file (usually `pxelinux.cfg/default`) to include the necessary parameters to use the `preseed.cfg` file. For example:
+
+### NFS + TFTP
 ```
 label install
     menu label ^Install Debian
     kernel debian/debian-installer/amd64/linux
     append initrd=debian/debian-installer/amd64/initrd.gz root=/dev/nfs nfsroot=192.168.1.153:/srv/nfs/debian netboot=nfs ip=dhcp rw nfsroot auto=true priority=critical preseed/url=tftp://192.168.1.153/debian/preseed.cfg
 ```
+
+### NFS + APACHE
+```
+append initrd=debian/debian-installer/amd64/initrd.gz root=/dev/nfs nfsroot=192.168.1.153:/srv/nfs/debian netboot=nfs ip=dhcp rw auto=true priority=critical preseed/url=http://192.168.1.153/debian/preseed.cfg
+```
+
+### APACHE
+```
+append initrd=debian/debian-installer/amd64/initrd.gz root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://192.168.1.153/debian/debian.iso auto=true priority=critical preseed/url=http://192.168.1.153/debian/preseed.cfg
+```
+
 :warning: preseed/url is of the server TFTP: /var/lib/tftpboot/debian
 
-3. During network boot, the PXE client will download the `preseed.cfg` file and use it to automatically answer questions during the Ubuntu installation process.
+3. During network boot, the PXE client will download the `preseed.cfg` file and use it to automatically answer questions during the Debian installation process.
 
 Using `preseed.cfg` allows you to fully automate the Debian installation, reducing the risk of errors and simplifying the installation process across multiple machines.
 

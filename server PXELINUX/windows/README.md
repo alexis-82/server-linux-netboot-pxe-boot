@@ -82,4 +82,3 @@ sudo cp -r /mnt/* /srv/win/
   ```sh
   sudo tail -f /var/log/samba/log.smbd
   ```
-```
